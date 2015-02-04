@@ -17,7 +17,7 @@ public class MongoDBDataAccess {
 
     public void init() throws UnknownHostException {
         this.mongoClient = new MongoClient("localhost", 27017);
-        this.db = mongoClient.getDB("mydb");
+        this.db = mongoClient.getDB("test");
     }
 
     public void close() {
