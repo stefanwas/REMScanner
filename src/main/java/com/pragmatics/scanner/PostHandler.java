@@ -1,6 +1,6 @@
 package com.pragmatics.scanner;
 
-import com.pragmatics.scanner.model.Post;
+import com.pragmatics.scanner.model.WebPost;
 
 public class PostHandler {
 
@@ -22,7 +22,7 @@ public class PostHandler {
     }
 
     public void test() {
-        Post p1 = new Post();
+        WebPost p1 = new WebPost();
 
         p1.setId("P1");
         p1.setTitle("Przytulna kawalerka");
@@ -31,7 +31,7 @@ public class PostHandler {
 
         this.mongoDBDataAccess.savePost(p1);
 
-        Post p2 = this.mongoDBDataAccess.getPostById("P1");
+        WebPost p2 = this.mongoDBDataAccess.getPostById("P1");
 
         System.out.println(p2);
 

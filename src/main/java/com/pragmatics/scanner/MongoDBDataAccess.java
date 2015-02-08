@@ -6,7 +6,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-import com.pragmatics.scanner.model.Post;
+import com.pragmatics.scanner.model.WebPost;
 
 import java.net.UnknownHostException;
 
@@ -24,31 +24,31 @@ public class MongoDBDataAccess {
         this.mongoClient.close();
     }
 
-    public void savePost(Post post) {
+    public void savePost(WebPost webPost) {
         DBCollection coll = db.getCollection("posts");
-        BasicDBObject obj = convertToDBObject(post);
+        BasicDBObject obj = convertToDBObject(webPost);
         coll.insert(obj);
 
     }
 
-    public Post getPostById(String id) {
+    public WebPost getPostById(String id) {
         BasicDBObject query = new BasicDBObject("id", id);
         DBCollection coll = db.getCollection("posts");
         DBCursor cursor = coll.find(query);
-        Post post = null;
+        WebPost webPost = null;
         try {
             if(cursor.hasNext()) {
                 DBObject obj = cursor.next();
-                post = convertToPost(obj);
+                webPost = convertToPost(obj);
 
             }
         } finally {
             cursor.close();
         }
-        return post;
+        return webPost;
     }
 
-    private BasicDBObject convertToDBObject(Post p) {
+    private BasicDBObject convertToDBObject(WebPost p) {
         BasicDBObject object = new BasicDBObject("id", p.getId())
                 .append("url", p.getUrl())
                 .append("title", p.getTitle())
@@ -57,14 +57,14 @@ public class MongoDBDataAccess {
         return object;
     }
 
-    private Post convertToPost(DBObject obj) {
-        Post post = new Post();
+    private WebPost convertToPost(DBObject obj) {
+        WebPost webPost = new WebPost();
 
-        post.setId((String) obj.get("id"));
-        post.setUrl((String) obj.get("url"));
-        post.setTitle((String) obj.get("title"));
-        post.setContent((String) obj.get("content"));
+        webPost.setId((String) obj.get("id"));
+        webPost.setUrl((String) obj.get("url"));
+        webPost.setTitle((String) obj.get("title"));
+        webPost.setContent((String) obj.get("content"));
 
-        return post;
+        return webPost;
     }
 }

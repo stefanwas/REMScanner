@@ -1,12 +1,21 @@
 package com.pragmatics.scanner.model;
 
 
-public class Post {
+public class WebPost {
 
     private String id;
     private String url;
     private String title;
+    private String price;
     private String content;
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
     public String getId() {
         return id;
@@ -42,7 +51,7 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post{" +
+        return "WebPost{" +
                 "id='" + id + '\'' +
                 ", url='" + url + '\'' +
                 ", title='" + title + '\'' +
