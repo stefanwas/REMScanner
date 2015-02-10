@@ -24,32 +24,32 @@ public class MongoDBDataAccess {
         this.mongoClient.close();
     }
 
-    public void savePost(WebPost webPost) {
+    public void savePost(WebPost post) {
         DBCollection coll = db.getCollection("posts");
-        BasicDBObject obj = convertToDBObject(webPost);
+        BasicDBObject obj = convertToDBObject(post);
         coll.insert(obj);
 
     }
 
     public WebPost getPostById(String id) {
-        BasicDBObject query = new BasicDBObject("id", id);
+        BasicDBObject query = new BasicDBObject("_id", id);
         DBCollection coll = db.getCollection("posts");
         DBCursor cursor = coll.find(query);
-        WebPost webPost = null;
+        WebPost post = null;
         try {
             if(cursor.hasNext()) {
                 DBObject obj = cursor.next();
-                webPost = convertToPost(obj);
+                post = convertToPost(obj);
 
             }
         } finally {
             cursor.close();
         }
-        return webPost;
+        return post;
     }
 
     private BasicDBObject convertToDBObject(WebPost p) {
-        BasicDBObject object = new BasicDBObject("id", p.getId())
+        BasicDBObject object = new BasicDBObject("_id", p.getId())
                 .append("url", p.getUrl())
                 .append("title", p.getTitle())
                 .append("content", p.getContent());
@@ -58,13 +58,13 @@ public class MongoDBDataAccess {
     }
 
     private WebPost convertToPost(DBObject obj) {
-        WebPost webPost = new WebPost();
+        WebPost post = new WebPost();
 
-        webPost.setId((String) obj.get("id"));
-        webPost.setUrl((String) obj.get("url"));
-        webPost.setTitle((String) obj.get("title"));
-        webPost.setContent((String) obj.get("content"));
+        post.setId((String) obj.get("_id"));
+        post.setUrl((String) obj.get("url"));
+        post.setTitle((String) obj.get("title"));
+        post.setContent((String) obj.get("content"));
 
-        return webPost;
+        return post;
     }
 }
