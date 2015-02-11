@@ -52,7 +52,7 @@ public class MongoDBDataAccess {
         BasicDBObject object = new BasicDBObject("_id", p.getId())
                 .append("url", p.getUrl())
                 .append("title", p.getTitle())
-                .append("content", p.getContent());
+                .append("content", p.getDescription());
 
         return object;
     }
@@ -63,7 +63,7 @@ public class MongoDBDataAccess {
         post.setId((String) obj.get("_id"));
         post.setUrl((String) obj.get("url"));
         post.setTitle((String) obj.get("title"));
-        post.setContent((String) obj.get("content"));
+        post.setDescription((String) obj.get("content"));
 
         return post;
     }

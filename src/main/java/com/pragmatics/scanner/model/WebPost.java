@@ -1,19 +1,26 @@
 package com.pragmatics.scanner.model;
 
 
+import java.util.Date;
+
 public class WebPost {
 
     private String id;
+    private AdSource source;
     private String url;
     private String title;
-    private String price;
-    private String content;
+    private Double price;
+    private Double size;
+    private String description;
+    private String address;
+    private Integer noOfRooms;
+    private Date addDate;
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -25,12 +32,12 @@ public class WebPost {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public String getDescription() {
+        return description;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getUrl() {
@@ -49,13 +56,43 @@ public class WebPost {
         this.title = title;
     }
 
-    @Override
-    public String toString() {
-        return "WebPost{" +
-                "id='" + id + '\'' +
-                ", url='" + url + '\'' +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                '}';
+    public AdSource getSource() {
+        return source;
+    }
+
+    public void setSource(AdSource source) {
+        this.source = source;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Double getSize() {
+        return size;
+    }
+
+    public void setSize(Double size) {
+        this.size = size;
+    }
+
+    public Integer getNoOfRooms() {
+        return noOfRooms;
+    }
+
+    public void setNoOfRooms(Integer noOfRooms) {
+        this.noOfRooms = noOfRooms;
+    }
+
+    public Date getAddDate() {
+        return addDate;
+    }
+
+    public void setAddDate(Date addDate) {
+        this.addDate = addDate;
     }
 }

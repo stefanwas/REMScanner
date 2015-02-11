@@ -26,7 +26,7 @@ public class PostHandler {
 
         p1.setId("P1");
         p1.setTitle("Przytulna kawalerka");
-        p1.setContent("Ala ma kota ale ma kota 123123");
+        p1.setDescription("Ala ma kota ale ma kota 123123");
         p1.setUrl("https://www.youtube.com/watch?v=kDfw12hQJnY");
 
         this.mongoDBDataAccess.savePost(p1);

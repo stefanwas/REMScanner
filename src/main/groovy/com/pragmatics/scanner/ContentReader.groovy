@@ -1,7 +1,7 @@
 package com.pragmatics.scanner
 
+import com.pragmatics.scanner.gumtree.GumtreeAdContentExtractor
 import groovy.util.slurpersupport.GPathResult
-import groovyx.net.http.HTTPBuilder
 import org.ccil.cowan.tagsoup.Parser;
 
 class ContentReader {
@@ -12,6 +12,12 @@ class ContentReader {
 
 
         def src = new File("D:\\IDEASPACE\\REMScanner\\src\\main\\resources\\sample_post.html").text;
+
+        GumtreeAdContentExtractor extractor = new GumtreeAdContentExtractor();
+        Map<String, String> data = extractor.extractData(src);
+
+        println data;
+
 
 //        println "FILE:" + src;
 //        def text = "\nala facebook kota";
