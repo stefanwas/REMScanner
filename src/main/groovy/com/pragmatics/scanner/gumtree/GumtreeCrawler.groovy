@@ -1,25 +1,33 @@
 package com.pragmatics.scanner.gumtree
 
-import org.ccil.cowan.tagsoup.Parser
-
 class GumtreeCrawler {
     public static final String GUMTREE_BASE_URL = "http://www.gumtree.pl/fp-mieszkania-i-domy-sprzedam-i-kupie/krakow/c9073l3200208?A_DwellingType=flat&AdType=2";
-
-    private XmlSlurper xmlSlurper = new XmlSlurper(new Parser());
+    private static final String AD_LINK_PATTERN = /<a href="(.*)"class="adLinkSB" >/;
 
     private String createPageUrl(int pageNo) {
         return GUMTREE_BASE_URL + "&Page=" + pageNo;
     }
 
-    private List<String> extractAdsFromPage(String pageUrl) {
+
+    private List<String> extractAdLinksFromPage(String pageUrl) {
         String multiAdPageContent = new URL(pageUrl).getText();
+        List<String> titles = multiAdPageContent.findAll(AD_LINK_PATTERN);
 
-        def htmlParser = this.xmlSlurper.parseText(multiAdPageContent);
-
-        htmlParser.'**'.find{ it.@class == 'adLinkSB'}.each {
-            println adtitle = it.href.text();
+        List<String> links = new ArrayList<>();
+        for (String title : titles) {
+            String link = title.replace("<a href=\"", "").replace("\"class=\"adLinkSB\" >", "").trim();
+            links.add(link);
         }
-        return title;
+        return links;
     }
+
+//    public static void main(String[] args) {
+//        GumtreeCrawler crawler = new GumtreeCrawler();
+//
+//        String pageUrl = crawler.createPageUrl(2);
+//
+//        List<String> links = crawler.extractAdLinksFromPage(pageUrl);
+//
+//    }
 
 }
