@@ -11,6 +11,7 @@ class GumtreeCrawler {
     }
 
     private String getPageContent(String url) {
+        //TODO page download + url
         return new URL(pageUrl).getText();
     }
 
@@ -46,6 +47,7 @@ class GumtreeCrawler {
             age = calculateOldestAdAge(pageContent);
         }
 
+        //TODO logging - how many links from last day???
         return new ArrayList<String>(allLinks);
     }
 

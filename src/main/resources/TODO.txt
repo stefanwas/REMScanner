@@ -3,3 +3,7 @@
 1. Backend (engine)
 
 2. Frontend (monitoring)
+
+------
+
+1. add logging + logstash
