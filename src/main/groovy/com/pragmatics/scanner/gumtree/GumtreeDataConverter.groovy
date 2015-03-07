@@ -3,8 +3,12 @@ package com.pragmatics.scanner.gumtree
 import com.pragmatics.scanner.model.AdSource
 import com.pragmatics.scanner.model.WebPost
 
+import java.text.NumberFormat
+
 
 class GumtreeDataConverter {
+
+    private static NumberFormat FORMATTER = NumberFormat.getInstance(Locale.FRANCE);
 
     public WebPost convert(Map<String, String> data) {
         WebPost post = new WebPost();
@@ -15,7 +19,7 @@ class GumtreeDataConverter {
         post.setAddress(data.get(GumtreeAdContentExtractor.ADDRESS_KEY));
 
         String priceStr = data.get(GumtreeAdContentExtractor.PRICE_KEY);
-        Double price = Double.parseDouble(priceStr.replace("Zł").trim());
+        Double price = FORMATTER.parse(priceStr.replace("Zł", "").replaceAll(" ", "").trim()).doubleValue();
         post.setPrice(price);
 
         String sizeStr = data.get(GumtreeAdContentExtractor.SIZE_KEY);
@@ -23,9 +27,17 @@ class GumtreeDataConverter {
         post.setSize(size);
 
         String noOfRoomsStr = data.get(GumtreeAdContentExtractor.NO_OF_ROOMS_KEY).split(" ")[0];
-        Integer noOfRooms = Integer.parseInt(noOfRoomsStr);
+        Integer noOfRooms = null;
+        if (noOfRoomsStr != null) {
+            if ("Kawalerka".equalsIgnoreCase(noOfRoomsStr) || "Garsoniera".equalsIgnoreCase(noOfRoomsStr)) {
+                noOfRooms = 1;
+            } else {
+                noOfRooms = Integer.parseInt(noOfRoomsStr);
+            }
+        }
         post.setNoOfRooms(noOfRooms);
 
         return post;
     }
+
 }

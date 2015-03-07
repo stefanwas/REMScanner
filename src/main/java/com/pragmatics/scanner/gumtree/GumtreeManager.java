@@ -1,7 +1,13 @@
 package com.pragmatics.scanner.gumtree;
 
-/**
- * Created by Wojtek on 23.02.15.
- */
 public class GumtreeManager {
+
+    private GumtreeCrawler crawler;
+
+    public void init() {
+        this.crawler = new GumtreeCrawler();
+    }
+
+    // scan and get WebPost list
+//    public void loadAds()
 }
